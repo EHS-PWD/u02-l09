@@ -1,0 +1,104 @@
+name: Autograding Tests
+on:
+  - push
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Form Structure Tests
+        id: form-structure-tests
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Form Structure Tests
+          setup-command: npm install
+          command: npm test -- --testNamePattern='Form Structure'
+          timeout: 10
+          max-score: 10
+      - name: Personal Information Fieldset Tests
+        id: personal-information-fieldset-tests
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Personal Information Fieldset Tests
+          setup-command: ''
+          command: npm test -- --testNamePattern='Personal Information Fieldset'
+          timeout: 10
+          max-score: 15
+      - name: Account Security Fieldset Tests
+        id: account-security-fieldset-tests
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Account Security Fieldset Tests
+          setup-command: ''
+          command: npm test -- --testNamePattern='Account Security Fieldset'
+          timeout: 10
+          max-score: 15
+      - name: Additional Information Fieldset Tests
+        id: additional-information-fieldset-tests
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Additional Information Fieldset Tests
+          setup-command: ''
+          command: npm test -- --testNamePattern='Additional Information Fieldset'
+          timeout: 10
+          max-score: 15
+      - name: Gender Select with Optgroups Tests
+        id: gender-select-with-optgroups-tests
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Gender Select with Optgroups Tests
+          setup-command: ''
+          command: npm test -- --testNamePattern='Gender Select with Optgroups'
+          timeout: 10
+          max-score: 10
+      - name: Country Input with Datalist Tests
+        id: country-input-with-datalist-tests
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Country Input with Datalist Tests
+          setup-command: ''
+          command: npm test -- --testNamePattern='Country Input with Datalist'
+          timeout: 10
+          max-score: 10
+      - name: Form Buttons Tests
+        id: form-buttons-tests
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Form Buttons Tests
+          setup-command: ''
+          command: npm test -- --testNamePattern='Form Buttons'
+          timeout: 10
+          max-score: 10
+      - name: Accessibility Features Tests
+        id: accessibility-features-tests
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Accessibility Features Tests
+          setup-command: ''
+          command: npm test -- --testNamePattern='Accessibility Features'
+          timeout: 10
+          max-score: 15
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          FORM-STRUCTURE-TESTS_RESULTS: '${{steps.form-structure-tests.outputs.result}}'
+          PERSONAL-INFORMATION-FIELDSET-TESTS_RESULTS: '${{steps.personal-information-fieldset-tests.outputs.result}}'
+          ACCOUNT-SECURITY-FIELDSET-TESTS_RESULTS: '${{steps.account-security-fieldset-tests.outputs.result}}'
+          ADDITIONAL-INFORMATION-FIELDSET-TESTS_RESULTS: '${{steps.additional-information-fieldset-tests.outputs.result}}'
+          GENDER-SELECT-WITH-OPTGROUPS-TESTS_RESULTS: '${{steps.gender-select-with-optgroups-tests.outputs.result}}'
+          COUNTRY-INPUT-WITH-DATALIST-TESTS_RESULTS: '${{steps.country-input-with-datalist-tests.outputs.result}}'
+          FORM-BUTTONS-TESTS_RESULTS: '${{steps.form-buttons-tests.outputs.result}}'
+          ACCESSIBILITY-FEATURES-TESTS_RESULTS: '${{steps.accessibility-features-tests.outputs.result}}'
+        with:
+          runners: form-structure-tests,personal-information-fieldset-tests,account-security-fieldset-tests,additional-information-fieldset-tests,gender-select-with-optgroups-tests,country-input-with-datalist-tests,form-buttons-tests,accessibility-features-tests
