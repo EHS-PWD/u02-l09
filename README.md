@@ -1,4 +1,4 @@
-### **Lesson 8: Organizing Forms with Fieldsets and Data Lists**
+### **Lesson 9: Organizing Forms with Fieldsets and Data Lists**
 
 In this lesson, you will continue enhancing the user registration form by adding `<fieldset>`, `<legend>`, `<optgroup>`, and `<datalist>` elements to better organize the form and improve user experience.
 
