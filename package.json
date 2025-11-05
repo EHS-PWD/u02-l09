@@ -1,0 +1,20 @@
+{
+  "name": "fieldsets-data-lists",
+  "version": "1.0.0",
+  "description": "Lesson 9: Organizing Forms with Fieldsets and Data Lists",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "html",
+    "forms",
+    "education",
+    "testing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "^23.0.0"
+  }
+}
